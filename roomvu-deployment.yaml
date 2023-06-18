@@ -1,0 +1,139 @@
+# This file is created for deployment manifest roomvu-app
+# The deployment manifest defines how many replicas of roomvu Laravel 10
+# application should be running.
+# But let us start with one replica, and if you want, just try to increase
+# this number.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roomvu-app
+  labels:
+    app: roomvu-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: roomvu-app
+  template:
+    metadata:
+      labels:
+        app: roomvu-app
+    spec:
+      containers:
+      - name: roomvu-app
+        image: localhost:5000/roomvu-app:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: mysql
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_DATABASE
+          value: my_database
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+---
+# mysql persistent volume yaml
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /data/mysql
+
+---
+# mysql persistent volume claim yaml
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      app: mysql
+---
+# Services manifest are used with [ load balancing, Port Mapping, External Access ]
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: roomvu-app
+  labels:
+    app: roomvu-app
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  selector:
+    app: roomvu-app
+---
+# mysql-secret yaml
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+type: Opaque
+data:
+  username: cm9vbXZ1Og==
+  password: cm9vbXZ1Og==
+---
+# The ingress manifest is define to expose your Laravel 10 application to external clients.
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: roomvu-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: roomvu-app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: roomvu-app
+            port:
+              name: http
+---
+# Horizontal Pod Autoscaler, which is a Kubernetes that automatically scales the number of replicas.
+
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v1
+metadata:
+  name: roomvu-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: app/v1
+    kind: Deployment
+    name: roomvu-app
+  minReplicas: 3
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
