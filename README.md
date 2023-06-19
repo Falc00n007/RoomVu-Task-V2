@@ -202,6 +202,79 @@ REPOSITORY                     TAG                 IMAGE ID            CREATED  
 localhost:5000/roomvu-app      latest              7e0aa2d69a15        3 minutes ago         795MB
 </pre>
 
+# Create fresh image and push to Docker Hub registery:
+
+**The given CLI command performs the following operations:**
+
+* Logs in to Docker Hub using the **docker login** command, and provides the username and password for authentication.
+<pre>
+[/roomvu-tasks/task-1]
+└─# docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: farshidrahimi
+Password:
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+</pre>
+
+* Lists all the available Docker images using the **docker images** command.
+<pre>
+┌──(root㉿DarkHole2)-[/roomvu-tasks/task-1]
+└─# docker images
+REPOSITORY                                                       TAG              IMAGE ID       CREATED         SIZE
+roomvu-app                                                       latest           2002d3efc918   2 days ago      711MB
+localhost:5000/roomvu-app                                        latest           2002d3efc918   2 days ago      711MB
+</pre>
+
+* **Tags** the **roomvu-app** image with the name **farshidrahimi/roomvu-app** [thus tag name is for my expelenation, you can use another] using the **docker tag** command.
+<pre>
+┌──(root㉿DarkHole2)-[/roomvu-tasks/task-1]
+└─# docker tag roomvu-app:latest farshidrahimi/roomvu-app
+</pre>
+
+*Lists all the available Docker images again, this time including the newly tagged image.
+<pre>
+┌──(root㉿DarkHole2)-[/roomvu-tasks/task-1]
+└─# docker images
+farshidrahimi/roomvu-app                                         latest           2002d3efc918   2 days ago      711MB
+roomvu-app                                                       latest           2002d3efc918   2 days ago      711MB
+localhost:5000/roomvu-app                                        latest           2002d3efc918   2 days ago      711MB
+</pre>
+
+* Pushes the **farshidrahimi/roomvu-app** image to the Docker repository using the **docker push** command. The push operation displays the progress of pushing each layer of the Docker image to the repository.
+
+<pre>
+┌──(root㉿DarkHole2)-[/roomvu-tasks/task-1]
+└─# docker push farshidrahimi/roomvu-app
+Using default tag: latest
+The push refers to repository [docker.io/farshidrahimi/roomvu-app]
+a5265c4e6a1e: Pushing [=======>                                           ]  12.19MB/82.46MB
+72927976b605: Pushed
+5f01d01379fb: Pushed
+156c4ef9096e: Pushed
+3017a7c14725: Pushed
+eb202808b845: Pushing [===========>                                       ]  27.37MB/123.1MB
+a3c0c0facd55: Mounted from library/php
+ca9f686628b3: Mounted from library/php
+3f32341c2c2f: Mounted from library/php
+20e19978003b: Mounted from library/php
+6c390a8d996a: Mounted from library/php
+32042fe8fb5b: Mounted from library/php
+fba0b6a8578d: Mounted from library/php
+d0cb0601f773: Mounted from library/php
+16239bea3ffb: Mounted from library/php
+434669f1b912: Pushed
+0fa9ad4dea5f: Pushing [====>                                              ]  26.37MB/315.6MB
+b9d89606d8e4: Pushed
+ac4d164fef90: Mounted from library/php
+</pre>
+
+**Attention!** On **spec part**, you can use **2** image **repositories* on **image:** tag, one by **local** reposiroty like:   image: **localhost:5000/roomvu-app:latest** or **farshidrahimi/roomvu-app** on https://hub.docker.com/r/farshidrahimi/roomvu-app. this is your choise.  
+
+
 
 # How To Deployment roomvu-app on kubernetes ? 
 
