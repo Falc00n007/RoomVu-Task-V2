@@ -468,6 +468,26 @@ call me on +98 939 63 10 462 or mail me  farshidrahimi.ca@gmail.com
 
 **This is changed and customized and named version 2, Version 2 of this product has the same features and functionality as Version 1, but with improved flexibility for customization thanks to the separation of manifest files.
 
+
+
+**Considering that i saied, the submitted task will have more aspects of checking and understanding my technical values for you. I tried to explain the steps completely in order and in detail. Or in general terms (line by line). But in the end, my suggestion for doing this task professionally will be as follows:**
+
+**Managing Docker images in Kubernetes can be done using a combination of Ansible, Terraform, and/or Puppet. Here are some steps you can follow to get started:**
+
+*   Define your infrastructure as code (IaC): Decide which IaC tool you want to use - Ansible, Terraform, or Puppet - to define your infrastructure resources such as nodes, containers, and services.
+
+*   Define the Docker image: Define your Docker image within your IaC code. You can specify the container image tag, repository location, and relevant configurations.
+
+*   Build and push the Docker image: Use a Dockerfile to build your application, and then push it to a container registry such as DockerHub or Google Container Registry.
+
+*  Deploy the image: Use your IaC tool to deploy your Docker image to Kubernetes. This can be done by defining a Kubernetes deployment YAML file that specifies the Docker image and any other required configuration settings.
+
+* Automate the process: Once you have defined your IaC code to deploy your Docker images in Kubernetes, you can automate the entire process by using CI/CD tools such as Jenkins, GitLab CI, or CircleCI.
+
+**By following these steps, you can manage your Docker image projects in Kubernetes using Ansible, Terraform, or Puppet.**
+
+
+
 This change will make it easier for DovOps guys to tailor the product to their specific needs. The development and implementation steps for Version 2 remain the same as in previous versions, leveraging the expertise of DevOps guys.**
 
 
