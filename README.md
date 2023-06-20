@@ -462,6 +462,12 @@ Assuming the ingress controller has been properly configured with an Ingress res
 
 I hope this helps! Let me know if you have any further questions.
 
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=git,gitlab,github,githubactions,jenkins,nginx,kubernetes,docker,ansible,gcp,aws,azure,linux,mongodb,mysql,postgres,prometheus,laravel,py,django,flask,rabbitmq,redis," />
+  </a>
+</p>
+
 call me on +98 939 63 10 462 or mail me  farshidrahimi.ca@gmail.com
 
 * **Final and important explanation**
@@ -488,7 +494,6 @@ call me on +98 939 63 10 462 or mail me  farshidrahimi.ca@gmail.com
 
 
 
-**Attention Task Tester:** **Local** testing is often different from testing in a real **product environment**. I have tried to explain the details of all the stories involved in this test in every stage. However, due to the nature of many infrastructure cases, there may be a need to manually check and make some changes and versioning to this test, which is usually negotiable to finalize. Please bear with**me**. **Thank you**.
-This change will make it easier for DovOps guys to tailor the product to their specific needs. The development and implementation steps for Version 2 remain the same as in previous versions, leveraging the expertise of DevOps guys.**
-
-
+> **Warning**
+> **Attention Task Tester:**
+**Local** testing is often different from testing in a real **product environment**. I have tried to explain the details of all the stories involved in this test in every stage. However, due to the nature of many infrastructure cases, there may be a need to manually check and make some changes and versioning to this test, which is usually negotiable to finalize. Please bear with**me**. **Thank you**.
